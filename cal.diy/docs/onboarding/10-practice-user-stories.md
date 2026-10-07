@@ -1836,8 +1836,8 @@ This is team settings read UI. Data is on `User.timeZone`, but query selection m
 
 ### Files to inspect first
 
-- `apps/web/modules/teams`
-- `packages/trpc/server/routers/viewer/teams` or related team routers
+- `apps/web/modules/teams` (not present in this snapshot)
+- `packages/trpc/server/routers/viewer/teams` or related team routers (no `teams` router folder exists in this snapshot; the later spike in `13-remaining-stories-implementation-journal.md` found the timezone column in `apps/web/modules/users/components/UsersTable.tsx`)
 - `packages/features/membership`
 - `packages/prisma/schema.prisma`
 

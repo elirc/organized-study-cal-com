@@ -188,7 +188,7 @@ Why this flow matters: canonical outbound integration — signing, scheduling, r
 Open:
 - `packages/features/webhooks/lib/sendPayload.ts:296-327` (signing + send).
 - `packages/features/tasker/tasker.ts` (queue interface).
-- `packages/features/tasker/task-processor.ts:9-45` (retry loop).
+- `packages/features/tasker/task-processor.ts:9-42` (retry loop).
 
 Trace:
 

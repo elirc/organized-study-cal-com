@@ -276,7 +276,7 @@ Example consumers of the platform/API packages. Use these to understand external
 
 ## `docs/`
 
-Documentation. Existing docs include API reference material under `docs/api-reference`. The onboarding docs live in `docs/onboarding`.
+Documentation. Existing docs include API reference material under `docs/api-reference` (absent from this study export: its `v2/openapi.json` was filtered out, per the repo-root `SECURITY_FILTERED_FILES.md`, so the folder does not exist here). The onboarding docs live in `docs/onboarding`.
 
 Touch this directory when creating internal developer documentation.
 

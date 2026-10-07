@@ -16,7 +16,7 @@ yarn db-seed                            # seed demo users/event types
 yarn dev                                # Next.js web app only (turbo --filter=@calcom/web)
 ```
 
-If `yarn dx` fights you, the manual path is `yarn prisma migrate deploy` (via `yarn db-deploy`) then `yarn db-seed`. Seeded logins are defined in `packages/prisma/seed.ts` (open it and look for the credentials it prints/creates — verify there, don't trust docs).
+If `yarn dx` fights you, the manual path is `yarn prisma migrate deploy` (via `yarn db-deploy`) then `yarn db-seed`. Seeded logins are defined in `scripts/seed.ts` (open it and look for the credentials it prints/creates — verify there, don't trust docs). `yarn db-seed` runs `prisma db seed` inside `packages/prisma`, whose `package.json` maps `prisma.seed` to `yarn seed-basic`, which runs `../../scripts/seed.ts`. The root `package.json` also has a `prisma.seed` entry, pointing at `./packages/prisma/seed.ts`, but **that file does not exist in this snapshot**. Don't go looking for it.
 
 Sanity checks: `http://localhost:3000` shows login; a seeded user's public page at `http://localhost:3000/<username>` shows their event types.
 
@@ -49,8 +49,8 @@ Then read `packages/features/bookings/lib/conflictChecker/checkForConflicts.ts` 
 
 ## Sunday afternoon — one safe change + one test
 
-1. **Safe change:** in your local tree, pick a UI string on the booking success page and change it (strings live in `packages/i18n/locales/en/common.json` — per `AGENTS.md`, all UI strings go through i18n). Watch it hot-reload. Revert.
-2. **Run one test file** (`inferred`): `yarn test packages/features/bookings/lib/conflictChecker/checkForConflicts.test.ts` — or if that exact path has no test, `yarn test checkForConflicts`. Also try `yarn test getBookingData` (there's `handleNewBooking/getBookingData.test.ts`). Note the runner: Vitest, `TZ=UTC`, `pool: "forks"` (`vitest.workspace.ts`).
+1. **Safe change:** in your local tree, pick a UI string on the booking success page and change it (strings live in `packages/i18n/locales/en/common.json` — per `AGENTS.md`, all UI strings go through i18n. **This study export omits `en/common.json` and `fr/common.json`** (see `SECURITY_FILTERED_FILES.md` at the repo root). The other 42 locale folders are present (the `en/` and `fr/` folders are gone entirely), so do this exercise in a full Cal.diy checkout, or read the key's usage in a component and its translation in e.g. `locales/de/common.json`). Watch it hot-reload. Revert.
+2. **Run one test file** (`inferred`): `yarn test packages/features/bookings/lib/conflictChecker/checkForConflicts.test.ts` (the file exists in this snapshot; `yarn test checkForConflicts` filters to it too). Also try `yarn test getBookingData` (there's `handleNewBooking/getBookingData.test.ts`). Note the runner: Vitest, `TZ=UTC`, `pool: "forks"` (`vitest.workspace.ts`).
 
 ## Sunday evening — teach-back (interview rehearsal)
 

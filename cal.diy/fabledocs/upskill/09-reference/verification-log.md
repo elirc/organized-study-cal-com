@@ -4,6 +4,24 @@ Running log of what was actually inspected while authoring this curriculum. Ever
 
 **Date:** 2026-07-11. **Method:** static reading of the repo (no dev server started, no tests executed, no database created). All commands in the curriculum are marked `verified` only if run here; otherwise `inferred` from `package.json` / `agents/commands.md` / CI workflows.
 
+## Re-check on 2026-10-06 (this study copy)
+
+This is a static re-check against this repository, `elirc/organized-study-cal-com`, snapshot `c08003d`. Nothing was installed, built or run.
+
+- **All five confirmed findings below still hold, at the same lines.** The PBAC stub is at `eventTypes/util.ts:15-20` and is called at 161-167. `delete` is built on it at `_router.ts:104`. The read-then-upsert in `reserveSlot.handler.ts` starts at line 68. The FIXME is at 80-82, and the catch-all `"Event type not found"` is at 104-108. The duplicate `busyTimesModule` load is at `AvailableSlots.ts:36-37`. The `maxAge: 10 * 60 * 60` "valid for 10 min only" comment is at `next-auth-options.ts:362`. The slots cache key `JSON.stringify(args.input)` falls inside 104-120, and `DEFAULT_SLOTS_CACHE_TTL = 2000` is at line 79. The `wc -l` sizes above also still match: 2851, 1435, 1351, 2690, 779 and 679. So do `handler()` at `RegularBookingService.ts:486` and the deps interface at 423.
+- **Links:** all 210 relative Markdown links in `fabledocs/upskill/` and `docs/onboarding/` resolve. Of the 916 backticked repo paths, 23 do not exist. Most of them are expected:
+  - generated or ignored paths (`packages/prisma/generated/prisma`, `packages/prisma/zod`, `packages/prisma/.env`);
+  - files that the spike journals (`docs/onboarding/11`–`13`) say were built and then reverted, such as `apps/web/app/api/health/route.ts` and the `lookupUserByEmail` handlers;
+  - a proposed new folder (`packages/features/pbac/`).
+- **Fixed in this pass:**
+  - the seed path in `00-fast-track.md` now points at `scripts/seed.ts`; the root `package.json` `prisma.seed` entry names a `packages/prisma/seed.ts` that does not exist;
+  - `packages/lib/constants` → `constants.ts`;
+  - a `task-processor.ts:9-45` anchor in a 42-line file → `9-42`;
+  - the `apps/web/modules/teams` and `viewer/teams` paths in story 33 are marked absent;
+  - the "if that exact path has no test" hedge in `00-fast-track.md` is removed: `conflictChecker/checkForConflicts.test.ts` and `handleNewBooking/getBookingData.test.ts` both exist.
+- **Salvage review (2026-10-07).** The edits above were left uncommitted by an interrupted run and were re-checked line by line before committing: `scripts/seed.ts` exists and `packages/prisma/package.json` maps `seed` → `seed-basic` → `../../scripts/seed.ts`; root `package.json` still names the missing `./packages/prisma/seed.ts`; `task-processor.ts` is 42 lines; `MINUTES_TO_BOOK` is at `constants.ts:137`; `locales/` holds 42 folders with no `en/`; `SECURITY_FILTERED_FILES.md` lists `openapi.json` and both `common.json` files. The duplicate load is in `packages/features/di/containers/AvailableSlots.ts` (the `modules/` file of the same name is a different file). The cache key is at `slots/util.ts:109`.
+- **Filtered export.** This copy omits 17 files (repo-root `SECURITY_FILTERED_FILES.md`). Two of the omissions matter to the curriculum. The first is `packages/i18n/locales/en/common.json` (and `fr/`), which the i18n exercises in `00-fast-track.md` and `06-contribution-practice/01-good-first-tickets.md` edit; both places now say so. The second is `docs/api-reference/v2/openapi.json`, so the `docs/api-reference` folder named in `docs/onboarding/01-repo-map.md` is absent. The other filtered files (telemetry, a few tests, platform example READMEs) are not cited.
+
 ## Environment
 
 - Repo root: `cal.diy/` inside `mastercal/`. Git repo present; branch `main`.

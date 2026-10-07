@@ -161,7 +161,7 @@ Difficulty: Easy — 1 hr. Skills: i18n.
 
 Story: As a non-English user, I want all labels translated.
 
-Why good: `AGENTS.md` requires UI strings go through `packages/i18n/locales/en/common.json`. Find a hardcoded user-facing string in a component and route it through the translation hook.
+Why good: `AGENTS.md` requires UI strings go through `packages/i18n/locales/en/common.json`. (That file was filtered out of this study export, per the repo-root `SECURITY_FILTERED_FILES.md`; do this ticket in a full Cal.diy checkout.) Find a hardcoded user-facing string in a component and route it through the translation hook.
 
 Acceptance criteria:
 - [ ] String added to `en/common.json`; component uses `t("key")`; renders unchanged in English.
@@ -319,7 +319,7 @@ Why good: `reserveSlot.handler.ts:29` computes `releaseAt = now + MINUTES_TO_BOO
 Acceptance criteria:
 - [ ] Test asserts `releaseAt` equals `slotStart-independent now + MINUTES_TO_BOOK` using a mocked clock; runner is `TZ=UTC`.
 
-Read first: `reserveSlot.handler.ts:26-29`, `MINUTES_TO_BOOK` in `packages/lib/constants`. What could go wrong: timezone/DST flakiness — use UTC and fake timers. Review questions: does it avoid real `Date.now()`?
+Read first: `reserveSlot.handler.ts:26-29`, `MINUTES_TO_BOOK` in `packages/lib/constants.ts` (line 137; defaults to `"5"`). What could go wrong: timezone/DST flakiness — use UTC and fake timers. Review questions: does it avoid real `Date.now()`?
 
 Interview story potential: "I made a time-based feature deterministically testable." (Interview: testing time/randomness — see [05-quality-engineering/01-testing-strategy.md](../05-quality-engineering/01-testing-strategy.md).)
 
